@@ -5,6 +5,7 @@ project 'tests'
     kind 'ConsoleApp'
     language 'C'
     cdialect 'C17'
+    toolset 'clang'
 
     files {
         'src/**.h',
@@ -49,6 +50,7 @@ project 'tests-no-popcount'
     kind 'ConsoleApp'
     language 'C'
     cdialect 'C17'
+    toolset 'clang'
 
     files {
         'src/**.h',

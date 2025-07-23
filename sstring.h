@@ -6,7 +6,7 @@
 #include <stddef.h>
 
 #ifndef SSTRING_CAPACITY 
-#    define SSTRING_CAPACITY 32
+    #define SSTRING_CAPACITY 32
 #endif
 
 typedef struct SString {

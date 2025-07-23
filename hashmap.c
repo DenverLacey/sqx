@@ -2,6 +2,7 @@
 #include "allocator.h"
 
 #include <assert.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -118,7 +119,9 @@ void hmputp(HashMap *m, const char *key, const void *value) {
         e->hash = h;
         e->index = m->length;
 
-        const char *new_key = strdup(key);
+        char *new_key = sqx_alloc(m->data->allocator, strlen(key) + 1, alignof(char));
+        assert(new_key);
+        strcpy(new_key, key);
         m->data->keys[e->index] = new_key;
     }
 

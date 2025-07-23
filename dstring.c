@@ -105,7 +105,7 @@ DString dsformat(const char *restrict fmt, ...) {
 }
 
 #ifdef _MSC_VER_
-#   define vmeasureprint _vscprintf
+    #define vmeasureprint _vscprintf
 #elif defined(__GNUC__)
 static int vmeasureprint(const char *restrict fmt, va_list ap) {
     va_list ap_copy;

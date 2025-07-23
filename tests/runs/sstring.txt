@@ -1,0 +1,16 @@
+Initialize:
+sslen = 0
+ssempty = 1
+Copy:
+s2 = 'Copied from C string.'
+s3 = 'This string is too long to fit '
+Format:
+s4 = 'A number: 99'
+Printf:
+s5 = 'A string: 'wow!''
+Clear:
+s1 = ''
+s2 = ''
+s3 = ''
+s4 = ''
+s5 = ''

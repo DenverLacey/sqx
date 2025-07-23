@@ -1,0 +1,8 @@
+Log:
+src/tests.c:32: LOG: This is a log
+Info:
+src/tests.c:35: INFO: This is an info
+Debug:
+src/tests.c:38: DEBUG: This is a debug
+Error:
+src/tests.c:41: ERROR: This is an error

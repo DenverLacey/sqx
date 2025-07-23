@@ -1,0 +1,21 @@
+Next:
+program
+hello
+Back:
+program
+hello
+Peek:
+world
+world
+world
+Match:
+match('foo') = 0
+match('bar') = 0
+match('world') = 1
+match('123') = 1
+match('456') = 1
+Null:
+peek = (null)
+next = (null)
+peek = (null)
+next = (null)

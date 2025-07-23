@@ -1,0 +1,27 @@
+Initialize:
+length = 0
+capacity = 0
+data is not null
+Put:
+length = 3
+capacity = 16
+entries = ('one': 1) ('two': 2) ('three': 3) 
+Get:
+'one' = 1
+'two' = 2
+'nine' = (null)
+Contains:
+'one' = 1
+'two' = 1
+'nine' = 0
+Remove:
+remove(one) = 1
+remove(nine) = 0
+entries = ('three': 3) ('two': 2) 
+Iter:
+three: 3
+two: 2
+Free:
+length = 0
+capacity = 0
+data = 0x0

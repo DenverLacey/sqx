@@ -1,0 +1,8 @@
+**/compile_commands.json
+**/.buildx/
+**/.DS_Store
+**/.cache
+**/bin
+**/obj
+*.make
+

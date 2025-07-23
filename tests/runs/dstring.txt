@@ -1,0 +1,19 @@
+Copy:
+s1 = 'This string was copied.'
+Copy N:
+s2 = 'This string has been cut sh'
+Dup:
+s3 = 'This string was copied.'
+Push:
+s3 = 'This string was copied..'
+Append:
+s3 = 'This string was copied... But we've added to it.'
+Extend:
+s3 = 'This string was copied... But we've added to it.This string has been cut sh'
+Format:
+s4 = 'The length of s3 is 75.'
+Free:
+s1 = '(null)'
+s2 = '(null)'
+s3 = '(null)'
+s4 = '(null)'

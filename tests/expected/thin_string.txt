@@ -1,0 +1,15 @@
+Initialize:
+length = 0
+capacity = 16
+allocator = 0x0
+bytes = 
+Append:
+length = 27
+capacity = 32
+bytes = Hello from test_thin_string
+Clear:
+length = 0
+capacity = 32
+bytes = 
+Free:
+s = 0x0

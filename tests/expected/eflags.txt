@@ -1,0 +1,15 @@
+Initialize:
+flags = 0
+Set:
+flags = 0x5
+Clear:
+flags = 0x4
+Toggle:
+flags = 0xa
+Check:
+Enum_ZERO = 0
+Enum_ONE = 1
+Enum_TWO = 0
+Enum_THREE = 1
+Count:
+#flags = 2

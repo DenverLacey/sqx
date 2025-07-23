@@ -1,0 +1,18 @@
+Initialise:
+length = 0
+first = 0x0
+Prepend:
+n1 = 1
+n2 = 2
+n3 = 3
+n4 = 4
+n5 = 5
+Get:
+i0 = 5
+i2 = 3
+i4 = 1
+Iter:
+5 4 3 2 1 
+Free:
+length = 0
+first = 0x0

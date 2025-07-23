@@ -1,0 +1,10 @@
+Find:
+find(1) = 0
+find(4) = 1
+find(7) = -1
+Last:
+last = 28
+Foreach:
+1 4 9 17 28 
+Foreach Rev:
+28 17 9 4 1 

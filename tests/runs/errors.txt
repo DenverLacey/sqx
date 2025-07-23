@@ -1,0 +1,8 @@
+Fail:
+Error occured in test_errors_fail
+Try - Void:
+test_errors_try_void_func failed
+Try - Non-Void:
+test_errors_try_int_func failed
+Ensure:
+Oh no! This has gone so badly wrong!

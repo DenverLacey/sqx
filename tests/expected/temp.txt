@@ -1,0 +1,28 @@
+Initialize:
+buffer = not null
+size = 32
+allocated = 0
+high_water_mark = 0
+Allocation:
+n1 = 1
+n2 = 2
+n3 = 3
+Mark:
+mark = 12
+allocated = 12
+Allocation - Array:
+ns = 3 4 5 6 7 
+Allocating - At Capacity:
+size = 32
+allocated = 32
+nn = 0x0
+Rollback:
+mark = 12
+allocated = 12
+Reset:
+allocated = 0
+Deinit:
+buffer = null
+size = 0
+allocated = 0
+high_water_mark = 0

@@ -5,7 +5,7 @@
 
 #define efset(ef__, fl__)     (*(ef__) |=  (1 << (fl__)))
 #define efclear(ef__, fl__)   (*(ef__) &= ~(1 << (fl__)))
-#define eftoggle(ef__, fl__)  (*(ef__) ^=  (1 << (fl__)))
+#define efflip(ef__, fl__)  (*(ef__) ^=  (1 << (fl__)))
 #define efcheck(ef__, fl__) (((ef__) & (1 << (fl__))) == (1 << (fl__)))
 #define efcount(ef__) (EF_POPCOUNT_(ef__))
 

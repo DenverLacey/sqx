@@ -191,10 +191,10 @@ void test_eflags(FILE *out, UNUSED Config cfg) {
     efclear(&flags, Enum_ONE);
     fprintf(out, "flags = 0x%x\n", flags);
 
-    fprintf(out, "Toggle:\n");
-    eftoggle(&flags, Enum_ONE);
-    eftoggle(&flags, Enum_TWO);
-    eftoggle(&flags, Enum_THREE);
+    fprintf(out, "Flip:\n");
+    efflip(&flags, Enum_ONE);
+    efflip(&flags, Enum_TWO);
+    efflip(&flags, Enum_THREE);
     fprintf(out, "flags = 0x%x\n", flags);
 
     fprintf(out, "Check:\n");

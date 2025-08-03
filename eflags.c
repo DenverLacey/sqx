@@ -9,6 +9,6 @@ int sqx_slow_popcount_(int x) {
     return (((x + (x >> 4)) & 0x0F0F0F0F) * 0x01010101) >> 24;
 }
 #else
-UNUSED int sqx_slow_popcount_(UNUSED int x) {return 0;}
+UNUSED static int sqx_slow_popcount_(UNUSED int x) {return 0;}
 #endif
 

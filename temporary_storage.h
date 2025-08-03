@@ -7,12 +7,18 @@
 
 #include <stddef.h>
 
+typedef struct TSMark {
+    const void* ptr;
+    size_t      allocated;
+} TSMark;
+
 void    tsinit(size_t size);
 void    tsdeinit(void);
-size_t  tsmark(void);
-void    tsrollback(size_t mark);
+TSMark  tsmark(void);
+void    tsrollback(TSMark mark);
 void    tsreset(void);
 void *  tsalloc(size_t size, size_t align);
+void *  tsrealloc(const void *ptr, size_t new_size, size_t align);
 #define tsnew(ty__) ((ty__*)tsalloc(sizeof(ty__), alignof(ty__)))
 #define tsnewn(ty__, n__) ((ty__*)tsalloc(sizeof(ty__) * (n__), alignof(ty__)))
 

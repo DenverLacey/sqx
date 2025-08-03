@@ -46,7 +46,7 @@ void test_alloc(FILE *out, UNUSED Config cgf) {
 
     fprintf(out, "List:\n");
     List_int ints = {.allocator = tsallocator()};
-    fprintf(out, "allocator = { %p, %s }\n", ints.allocator.allocator_data, (void*)ints.allocator.allocator_func ? "not null" : "null");
+    fprintf(out, "allocator = { 0x%zx, %s }\n", (size_t)ints.allocator.allocator_data, ints.allocator.allocator_func ? "not null" : "null");
 
     list_prepend(&ints, 1);
     list_prepend(&ints, 2);
@@ -327,7 +327,7 @@ void test_hashmap(FILE *out, UNUSED Config cfg) {
     hmfree(&map);
     fprintf(out, "length = %zu\n", map.length);
     fprintf(out, "capacity = %zu\n", map.capacity);
-    fprintf(out, "data = %p\n", (void*)map.data);
+    fprintf(out, "data = 0x%zx\n", (size_t)map.data);
 }
 
 void test_io(FILE *out, UNUSED Config cfg) {
@@ -340,7 +340,7 @@ void test_list(FILE *out, UNUSED Config cfg) {
     fprintf(out, "Initialise:\n");
     List_int list = {0};
     fprintf(out, "length = %zu\n", list.length);
-    fprintf(out, "first = %p\n", (void*)list.first);
+    fprintf(out, "first = 0x%zx\n", (size_t)list.first);
 
     fprintf(out, "Prepend:\n");
     ListNode_int *n1 = list_prepend(&list, 1);
@@ -373,7 +373,7 @@ void test_list(FILE *out, UNUSED Config cfg) {
     fprintf(out, "Free:\n");
     list_free(&list);
     fprintf(out, "length = %zu\n", list.length);
-    fprintf(out, "first = %p\n", (void*)list.first);
+    fprintf(out, "first = 0x%zx\n", (size_t)list.first);
 }
 
 void test_sstring(FILE *out, UNUSED Config cfg) {
@@ -428,8 +428,8 @@ void test_temp(FILE *out, UNUSED Config cfg) {
     fprintf(out, "n3 = %d\n", *n3);
 
     fprintf(out, "Mark:\n");
-    size_t mark = tsmark();
-    fprintf(out, "mark = %zu\n", mark);
+    TSMark mark = tsmark();
+    fprintf(out, "mark.allocated = %zu\n", mark.allocated);
     fprintf(out, "allocated = %zu\n", tsgetallocated());
 
     fprintf(out, "Allocation - Array:\n");
@@ -443,12 +443,14 @@ void test_temp(FILE *out, UNUSED Config cfg) {
     fprintf(out, "size = %zu\n", tsgetsize());
     fprintf(out, "allocated = %zu\n", tsgetallocated());
     int *nn = tsnew(int);
-    fprintf(out, "nn = %p\n", (void*)nn);
+    fprintf(out, "nn = 0x%zx\n", (size_t)nn);
 
     fprintf(out, "Rollback:\n");
     tsrollback(mark);
-    fprintf(out, "mark = %zu\n", mark);
+    fprintf(out, "mark.allocated = %zu\n", mark.allocated);
     fprintf(out, "allocated = %zu\n", tsgetallocated());
+
+    // TODO: Test tsrealloc
 
     fprintf(out, "Reset:\n");
     tsreset();
@@ -467,7 +469,7 @@ void test_thin_string(FILE *out, UNUSED Config cfg) {
     ThinString s = ths_new();
     fprintf(out, "length = %zu\n", s->length);
     fprintf(out, "capacity = %zu\n", s->capacity);
-    fprintf(out, "allocator = %p\n", (void*)s->allocator.allocator_func);
+    fprintf(out, "allocator = 0x%zx\n", (size_t)s->allocator.allocator_func);
     fprintf(out, "bytes = %s\n", s->bytes);
 
     fprintf(out, "Append:\n");
@@ -484,7 +486,7 @@ void test_thin_string(FILE *out, UNUSED Config cfg) {
 
     fprintf(out, "Free:\n");
     ths_free(&s);
-    fprintf(out, "s = %p\n", (void*)s);
+    fprintf(out, "s = 0x%zx\n", (size_t)s);
 }
 
 void test_vec(FILE *out, UNUSED Config cfg) {
@@ -492,7 +494,7 @@ void test_vec(FILE *out, UNUSED Config cfg) {
     Vec_int vec = {0};
     fprintf(out, "length = %zu\n", vec.length);
     fprintf(out, "capacity = %zu\n", vec.capacity);
-    fprintf(out, "items = %p\n", (void*)vec.items);
+    fprintf(out, "items = 0x%zx\n", (size_t)vec.items);
 
     fprintf(out, "Reserve:\n");
     vec_reserve(&vec, 5);

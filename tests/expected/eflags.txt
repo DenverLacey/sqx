@@ -4,7 +4,7 @@ Set:
 flags = 0x5
 Clear:
 flags = 0x4
-Toggle:
+Flip:
 flags = 0xa
 Check:
 Enum_ZERO = 0

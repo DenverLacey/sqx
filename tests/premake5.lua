@@ -4,7 +4,7 @@ configurations { 'debug', 'release' }
 project 'tests'
     kind 'ConsoleApp'
     language 'C'
-    cdialect 'C17'
+    cdialect 'gnu17'
     toolset 'clang'
 
     files {
@@ -49,7 +49,7 @@ project 'tests'
 project 'tests-no-popcount'
     kind 'ConsoleApp'
     language 'C'
-    cdialect 'C17'
+    cdialect 'gnu17'
     toolset 'clang'
 
     files {

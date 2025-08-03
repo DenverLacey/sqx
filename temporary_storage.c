@@ -14,7 +14,7 @@ struct TemporaryStorage {
     size_t size;
     size_t allocated;
     size_t high_water_mark;
-    char *previoud_allocation; // TODO: Use this to implement realloc
+    char *previous_allocation;
 } T;
 
 void tsinit(size_t size) {
@@ -32,13 +32,18 @@ void tsdeinit(void) {
     T.high_water_mark = 0;
 }
 
-size_t tsmark(void) {
-    return T.allocated;
+TSMark tsmark(void) {
+    return (TSMark) {
+        T.previous_allocation,
+        T.allocated,
+    };
 }
 
-void tsrollback(size_t mark) {
-    assert(mark <= T.allocated);
-    T.allocated = mark;
+void tsrollback(TSMark mark) {
+    assert(mark.ptr >= (const void*)T.buffer && mark.ptr <= (const void*)T.previous_allocation);
+    assert(mark.allocated <= T.allocated);
+    T.previous_allocation = (char*)mark.ptr;
+    T.allocated = mark.allocated;
 }
 
 void tsreset(void) {
@@ -62,7 +67,27 @@ void *tsalloc(size_t size, size_t align) {
         T.high_water_mark = T.allocated;
     }
 
+    T.previous_allocation = (char*)p;
     return (void*)p;
+}
+
+void *tsrealloc(const void *ptr, size_t new_size, size_t align) {
+    if (ptr != T.previous_allocation) {
+        return tsalloc(new_size, align);
+    }
+
+    size_t new_allocated = ((uintptr_t)ptr - (uintptr_t)T.buffer) + new_size;
+    if (new_allocated > T.size) {
+        return NULL;
+    }
+
+    T.allocated = new_allocated;
+
+    if (T.allocated > T.high_water_mark) {
+        T.high_water_mark = T.allocated;
+    }
+
+    return (void*)ptr;
 }
 
 char *tsgetbuffer(void) {
@@ -81,11 +106,12 @@ size_t tsgetwatermark(void) {
     return T.high_water_mark;
 }
 
-static void *tsallocatorfunc(UNUSED void *ap, AllocatorMode mode, UNUSED const void *ptr, size_t size, size_t align) {
+static void *tsallocatorfunc(UNUSED void *ap, AllocatorMode mode, const void *ptr, size_t size, size_t align) {
     switch (mode) {
         case AllocatorMode_ALLOC:
-        case AllocatorMode_REALLOC:
             return tsalloc(size, align);
+        case AllocatorMode_REALLOC:
+            return tsrealloc(ptr, size, align);
         case AllocatorMode_ALLOC_AND_ZERO: {
             void *p = tsalloc(size, align);
             memset(p, 0, size);
